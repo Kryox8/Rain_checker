@@ -23,7 +23,6 @@ json_data = response.json()
 relevant_entries = json_data['list'][:6]
 
 
-"""
 for entry in relevant_entries:
     if 500<= entry['weather'][0]['id'] <=599:
         client.messages.create(
@@ -35,14 +34,4 @@ for entry in relevant_entries:
 
         print('message sent')
         
-"""
 
-client.messages.create(
-
-            to=peronal_phone_number,
-            from_= '+12769001378',
-            body='Bring an umberlla its probably gonna rain 🌧️!'
-        )
-
-       
-print('message sent')
