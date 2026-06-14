@@ -1,0 +1,25 @@
+name: Umbrella Alert
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check_rain:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install requests twilio
+      - name: Run umbrella check
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          SMS_API_SID: ${{ secrets.SMS_API_SID }}
+          SMS_AUTH_TOKEN: ${{ secrets.SMS_AUTH_TOKEN }}
+          PERSONAL_PHONE_NUM: ${{ secrets.PERSONAL_PHONE_NUM }}
+        run: python main.py
